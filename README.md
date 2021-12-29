@@ -86,3 +86,33 @@ Para entender de vez:
 - Os Mixins são como os componentes dos sanduíches do Subway :tomato: :bread: :poultry_leg: :meat_on_bone:
 - As Views são como o Subway: você monta o seu, componente à componente :bread:
 - As ViewSets são como o McDonalds: seu sanduíche já vem montado :hamburger:
+
+## Routers
+
+Os Routers nos auxiliam na geração das URLs da nossa aplicação.
+
+Como o REST possui padrões bem definidos de estrutura de URLs, o DRF as gera automaticamente para nós, já no padrão correto.
+
+Basta utilizarmos seus Routers!
+
+Exemplo:
+
+```bash
+from rest_framework.routers import DefaultRouter
+from api.views import FundoImobiliarioViewSet
+
+
+app_name = 'api'
+
+router = DefaultRouter(trailing_slash=False)
+router.register(r'fundos', FundoImobiliarioViewSet)
+
+urlpatterns = router.urls
+```
+
+Vamos entender:
+
+- app_name é necessário para dar contexto às URLs geradas. Esse parâmetro especifica o namespace das URLConfs adicionadas.
+- DefaultRouter é o Router que escolhemos para geração automática das URLs. O parâmetro trailing_slash especifica que não é necessário o uso de barras / no final da URL.
+- O método register recebe dois parâmetros: o primeiro é o prefixo que será usado na URL (no nosso caso: http://localhost:8000/fundos) e o segundo é a View que ira responder as URLs com esse prefixo.
+- Por último, temos o velho urlpatterns do Django, que utilizamos para expor as URLs desse app.
