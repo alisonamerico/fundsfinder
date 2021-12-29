@@ -15,7 +15,7 @@ Vamos começar com a Modelagem!
 
 Para auxiliar nessa tarefa, escolhi alguns parâmetros de uma tabela muito interessante do site [FundsExplorer](https://www.fundsexplorer.com.br/ranking):
 
-![fundos](funds.png)
+![fundos](img-readme/funds.png)
 
 Vamos usar os seguintes atributos:
 
@@ -46,3 +46,43 @@ HyperlinkedModelSerializer: Similar ao ModelSerializer, contudo retorna um link 
 Vamos utilizar o ModelSerializer para construir o serializador da entidade FundoImobiliario.
 
 Para isso, precisamos declarar sobre qual modelo aquele serializador irá operar e quais os campos que ele deve se preocupar.
+
+## ViewSets
+
+As ViewSets definem quais operações REST estarão disponíveis e como seu sistema vai responder às chamadas à sua API.
+
+Em outros frameworks, são chamados de Resources ou Controllers.
+
+ViewSets herdam e adicionam lógica às Views padrão do Django.
+
+Suas responsabilidades são:
+
+Receber os dados da Requisição (formato JSON ou XML)
+Validar os dados de acordo com as regras definidas na modelagem e no Serializer
+Desserializar a Requisição e instanciar objetos
+Processar regras de negócio (aqui é onde implementamos a lógica dos nossos sistemas)
+Formular uma resposta e responder a quem chamou sua API
+
+Encontrei uma imagem muito interessante no [Reddit](https://www.reddit.com/r/django/comments/9grsum/a_django_rest_framework_view_inheritance_diagram/) que mostra o diagrama de herança das classes do DRF, que nos ajuda a entender melhor a estrutura interna do framework:
+
+![drf-classes](img-readme/drf-classes.png)
+
+Na imagem:
+
+- Lá em cima, temos a classe View padrão do Django.
+- APIView e ViewSet são classes do DRF que herdam de View e que trazem algumas configurações específicas para transformá-las em APIs, como métodos get() para tratar requisições HTTP GET e post() para tratar requisições HTTP POST.
+- Logo abaixo, temos a GenericAPIView - que é a classe base para views genéricas - e a GenericViewSet - que é a base para as ViewSets (a parte da direita em roxo na imagem).
+- No meio, em azul, temos os Mixins. Eles são os blocos de código responsáveis por realmente implementar as ações desejadas.
+- Em seguida temos as Views que disponibilizam as funcionalidades da nossa API, como se fossem blocos de Lego. Elas estendem dos Mixins para construir a funcionalidade desejada (seja listagem, seja deleção e etc)
+
+Por exemplo: se você quiser criar uma API que disponibilize apenas listagem de uma determinada Entidade você poderia escolher a ListAPIView.
+
+Agora se você precisar construir uma API que disponibilize apenas as operações de criação e listagem, você poderia utilizar a ListCreateAPIView.
+
+Agora se você precisar construir uma API “com tudo dentro” (isto é: criação, deleção, atualização e listagem), escolha a ModelViewSet: perceba que ela estende todos os Mixins disponíveis.
+
+Para entender de vez:
+
+- Os Mixins são como os componentes dos sanduíches do Subway :tomato: :bread: :poultry_leg: :meat_on_bone:
+- As Views são como o Subway: você monta o seu, componente à componente :bread:
+- As ViewSets são como o McDonalds: seu sanduíche já vem montado :hamburger:
