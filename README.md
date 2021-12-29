@@ -27,3 +27,22 @@ Vamos usar os seguintes atributos:
 - **Quantidade de Ativos**: Quantos ativos são administrados pelo Fundo.
 
 Com isso em mãos, podemos criar a modelagem da entidade **FundoImobiliario**.
+
+## Serializer
+
+Eles servem para traduzir entidades complexas, como querysets e instâncias de classes em representações simples que podem ser usadas no tráfego da web, como JSON e XML.
+
+Esse processo é chamado de Serialização.
+
+Serializers também servem para fazer o caminho contrário: a Desserialização.
+
+Isto é, transformar representações simples (como JSON e XML) em representações complexas, instanciando objetos, por exemplo.
+
+O DRF disponibiliza diversos tipos de serializers que podemos utilizar, como:
+
+BaseSerializer: Classe base para construção de Serializers mais genéricos.
+ModelSerializer: Auxilia a criação de serializadores baseados em modelos.
+HyperlinkedModelSerializer: Similar ao ModelSerializer, contudo retorna um link para representar o relacionamento entre entidades (ModelSerializer retorna, por padrão, o id da entidade relacionada).
+Vamos utilizar o ModelSerializer para construir o serializador da entidade FundoImobiliario.
+
+Para isso, precisamos declarar sobre qual modelo aquele serializador irá operar e quais os campos que ele deve se preocupar.
