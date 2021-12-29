@@ -119,6 +119,12 @@ Vamos entender:
 
 ## Instalação
 
+```bash
+git clone https://github.com/alisonamerico/fundsfinder.git
+cd fundsfinder
+cp contrib/env-sample .env
+```
+
 Primeiro, recomenda-se a criação de um ambiente virtual.
 
 ```bash
