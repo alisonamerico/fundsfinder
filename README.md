@@ -116,3 +116,39 @@ Vamos entender:
 - DefaultRouter é o Router que escolhemos para geração automática das URLs. O parâmetro trailing_slash especifica que não é necessário o uso de barras / no final da URL.
 - O método register recebe dois parâmetros: o primeiro é o prefixo que será usado na URL (no nosso caso: http://localhost:8000/fundos) e o segundo é a View que ira responder as URLs com esse prefixo.
 - Por último, temos o velho urlpatterns do Django, que utilizamos para expor as URLs desse app.
+
+## Instalação
+
+Primeiro, recomenda-se a criação de um ambiente virtual.
+
+```bash
+python3 -m venv .venv
+```
+
+Com seu ambiente virtual configurado, instale as dependências do projeto com:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Para criar as _Migrations_:
+
+```bash
+python manage.py makemigrations
+```
+
+Para efetivar as _Migrations_ no banco de dados:
+
+```bash
+python manage.py migrate
+```
+
+## Execução
+
+Para executar o servidor de testes do Django, execute:
+
+```bash
+python manage.py runserver
+```
+
+Conteúdo retirado da [Python Academy](https://pythonacademy.com.br/blog/construcao-de-apis-com-django-rest-framework)
